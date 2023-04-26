@@ -5,17 +5,15 @@ const main_output = () => {
 	main_timer.textContent = count;
 };
 
-const countdown = () => {
-	console.log('button clicked');
-	let count = 5;
-
+const countdown = (num) => {
+	let count = num;
+	main_timer.textContent = count;
 	let countdown = setInterval(() => {
-		console.log(count);
-		main_timer.textContent = count--;
-		if (count === -1) {
+		count--;
+		if (count === 0) {
 			beep.play();
 			clearInterval(countdown);
-		} else if (count === 0) {
 		}
+		main_timer.textContent = count;
 	}, 1000);
 };
