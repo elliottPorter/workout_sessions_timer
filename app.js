@@ -1,6 +1,8 @@
 const main_timer = document.getElementById('main_timer');
 const beep = document.getElementById('beep');
 const userSubmit = document.getElementById('userSubmit');
+const interval_label = document.getElementById('interval_label');
+const rest_period = document.getElementById('rest_period');
 const minutes = document.getElementById('minutes');
 const seconds = document.getElementById('seconds');
 const timers = [];
@@ -35,7 +37,12 @@ const countdown = (i) => {
 const pushTimerOptions = (e) => {
 	e.preventDefault();
 	let totalSeconds = Number(minutes.value) * 60 + Number(seconds.value);
-	timers.push(totalSeconds);
+	let rest = rest_period.value === 'true' ? true : false;
+	timers.push({
+		interval: interval_label.value !== null ? interval_label.value : null,
+		rest: rest,
+		totalSeconds: totalSeconds,
+	});
 	console.log(timers);
 	return totalSeconds;
 };

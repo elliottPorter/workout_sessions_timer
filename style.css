@@ -22,6 +22,11 @@ body {
 }
 
 form {
+	margin: 20px 0;
+	width: 70%;
+	border-radius: 10px;
+	padding: 2%;
+	background: rgba(255, 255, 255, 0.2);
 	font-size: 1em;
 }
 
@@ -56,4 +61,8 @@ button {
 	border-radius: 10px;
 	padding: 0.2em 0.6em;
 	font-family: Roboto_mono_bold, sans-serif;
+}
+
+div {
+	margin-bottom: 20px;
 }

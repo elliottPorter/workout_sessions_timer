@@ -12,54 +12,69 @@
 			<div id="main_timer"></div>
 			<button onClick="start()">Start</button>
 			<form id="user_input">
-				<label for="minutes"
-					>Minutes
-					<select id="minutes" name="minutes">
-						<option value="0" selected>0</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-					</select>
-				</label>
-				<label for="seconds"
-					>Seconds
-					<select id="seconds" name="seconds">
-						<option value="0" selected>0</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="12">12</option>
-						<option value="13">13</option>
-						<option value="14">14</option>
-						<option value="15">15</option>
-						<option value="16">16</option>
-						<option value="17">17</option>
-						<option value="18">18</option>
-						<option value="19">19</option>
-						<option value="20">20</option>
-						<option value="21">21</option>
-						<option value="22">22</option>
-						<option value="23">23</option>
-						<option value="24">24</option>
-						<option value="25">25</option>
-						<option value="26">26</option>
-						<option value="27">27</option>
-						<option value="28">28</option>
-						<option value="29">29</option>
-						<option value="30">30</option>
-					</select>
-				</label>
-                <input type="submit" id="userSubmit" value="Add times" />
+				<div>
+					<label for="rest_period"
+						>Rest?
+						<select id="rest_period">
+							<option value="false">No</option>
+							<option value="true">Yes</option>
+						</select>
+					</label>
+					<label for="interval_label"
+						>Label
+						<input id="interval_label" />
+					</label>
+				</div>
+				<div>
+					<label for="minutes"
+						>Minutes
+						<select id="minutes" name="minutes">
+							<option value="0" selected>0</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+					</label>
+					<label for="seconds"
+						>Seconds
+						<select id="seconds" name="seconds">
+							<option value="0" selected>0</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+							<option value="24">24</option>
+							<option value="25">25</option>
+							<option value="26">26</option>
+							<option value="27">27</option>
+							<option value="28">28</option>
+							<option value="29">29</option>
+							<option value="30">30</option>
+						</select>
+					</label>
+				</div>
+				<input type="submit" id="userSubmit" value="Add interval" />
 			</form>
 			<audio id="beep" src="./sounds/beep.mp3"></audio>
 		</div>
