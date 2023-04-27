@@ -21,10 +21,37 @@ body {
 	color: #eee;
 }
 
+form {
+	font-size: 1em;
+}
+
+input,
+select,
+option,
+input:focus,
+select:focus {
+	font-size: 1em;
+	border: none;
+	border-radius: 5px;
+	padding: 12px;
+	background: orange;
+	font-family: Roboto_mono_bold, sans-serif;
+}
+
+input[type='submit']:hover {
+	cursor: pointer;
+	color: orange;
+	background: #eee;
+}
+
+label {
+	font-size: 1em;
+}
+
 button {
 	font-size: 1em;
 	border: none;
-	background-color: orange;
+	background: orange;
 	color: #fff;
 	border-radius: 10px;
 	padding: 0.2em 0.6em;
