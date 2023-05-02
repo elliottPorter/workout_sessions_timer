@@ -10,7 +10,7 @@
 	<body>
 		<div id="app">
 			<div id="main_timer"></div>
-			<button onClick="start()">Start</button>
+			<button onClick="start(0)">Start</button>
 			<form id="user_input">
 				<div>
 					<label for="rest_period"
@@ -74,8 +74,10 @@
 						</select>
 					</label>
 				</div>
-				<input type="submit" id="userSubmit" value="Add interval" />
+				<input type="submit" id="user_submit" value="Add interval" />
+				<input type="submit" class="reset" id="reset_intervals" value="Reset intervals" />
 			</form>
+			<div id="intervals_ui">Waiting for your intervals</div>
 			<audio id="beep" src="./sounds/beep.mp3"></audio>
 		</div>
 		<script src="app.js"></script>
