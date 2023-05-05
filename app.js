@@ -9,6 +9,11 @@ const rest_period = document.getElementById('rest_period');
 const minutes = document.getElementById('minutes');
 const seconds = document.getElementById('seconds');
 const intervals_ui = document.getElementById('intervals_ui');
+const total_time = document.getElementById('total_time');
+let total_minutes = 0;
+let total_seconds = 0;
+let remaining_seconds = 0;
+let intervals_total_time = 0;
 let timers = [];
 
 // the function call from the start button
@@ -21,8 +26,6 @@ const start = (num) => {
 		resetIntervals();
 		return;
 	}
-
-	console.log(intervals_count);
 
 	// update the UI counter
 	main_timer.textContent = count;
@@ -59,10 +62,30 @@ const pushTimerOptions = (e) => {
 	e.preventDefault();
 
 	// transform the time entry into seconds
-	let totalSeconds = Number(minutes.value) * 60 + Number(seconds.value);
+	let totalSeconds = parseInt(seconds.value) + parseInt(minutes.value) * 60;
 
 	// is this a rest period?
 	let rest = rest_period.value === 'true' ? true : false;
+
+	// increase the total seconds for each interval submitted
+	intervals_total_time += totalSeconds;
+	console.log(intervals_total_time);
+
+	// function to create total time with minutes and remaining seconds
+	const create_total_time_for_ui = (seconds) => {
+		console.log(`Passed in: ${seconds}`);
+
+		total_minutes = Math.floor(parseInt(seconds) / 60);
+
+		console.log(total_minutes);
+
+		remaining_seconds = seconds %= 60;
+
+		return `Total time: ${total_minutes}m : ${remaining_seconds}s`;
+	};
+
+	// update the total time in ui
+	total_time.innerHTML = create_total_time_for_ui(intervals_total_time);
 
 	// send the interval content to the array
 	timers.push({
@@ -73,7 +96,7 @@ const pushTimerOptions = (e) => {
 		totalSeconds: totalSeconds,
 	});
 
-	// send the intervals into a new array
+	// send the intervals into a new array and create a total time for all intervals
 	let intervals_output = timers.map((timer) => {
 		return `<div class="row">
 <div class="interval">
@@ -90,7 +113,6 @@ const pushTimerOptions = (e) => {
 	});
 
 	// update the intervals ui
-	console.log(timers);
 	intervals_ui.innerHTML = intervals_output.join('');
 };
 
