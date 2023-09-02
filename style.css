@@ -21,13 +21,28 @@ body {
 	color: #eee;
 }
 
-#container {
+#modal_for_display {
+	position: absolute;
 	width: 90%;
+	margin: 10px auto;
+	display: none;
+	height: 90vh;
+	z-index: 666;
+	left:5%;
+	background-color:orange;
+	border-radius: 10px;
+}
+
+#container {
+	position: absolute;
+	width: 90%;
+	left: 5%;
 	margin: 10px auto;
 	display: grid;
 	grid-template-columns: 68% 28%;
 	grid-gap: 1%;
-	height: 98vh;
+	height: 90vh;
+	z-index: 1;
 }
 
 #output {
@@ -64,11 +79,16 @@ select {
 	text-align: center;
 }
 
-input.reset {
+input#reset_intervals {
 	background: #222;
 	color: orange;
 	font-family: Roboto_mono_light, sans-serif;
 	font-size: 80%;
+}
+
+input#reset_intervals:hover {
+	background: orange;
+	color: #222;
 }
 
 input[type='submit']:hover {
@@ -116,6 +136,45 @@ button {
 	width: 100%;
 	display: block;
 	margin: 20px auto 20px auto;
+	cursor: pointer;
+}
+
+button#start:hover {
+	background: #fff;
+	color: orange;
+}
+
+button#stop {
+	position:absolute;
+	font-size: 1.5em;
+	border: none;
+	background: #222;
+	color: #fff;
+	border-radius: 10px;
+	padding: 0.2em 0;
+	font-family: Roboto_mono_bold, sans-serif;
+	width: 90%;
+	display: block;
+	left:5%;
+	cursor: pointer;
+	bottom:0;
+}
+
+button#close {
+	border-radius:50px;
+	background-color:#fff;
+	position:absolute;
+	width:50px;
+	height:50px;
+	right:5%;
+	top:5%;
+	color:#222;
+	font-size:70%;
+}
+
+button#stop:hover {
+	background: #fff;
+	color: orange;
 }
 
 div {
@@ -141,11 +200,9 @@ div {
 	display: block;
 	border-radius: 10px;
 	background: #fff;
-	padding: 20px 3%;
+	padding: 20px 0;
 	color: orange;
-	margin-top: 20px;
 	text-align: center;
-	border-bottom: 2px dotted orange;
 }
 
 #intervals_ui div.min {
@@ -183,12 +240,11 @@ div {
 }
 
 #total_time {
-	width: 100%;
+	width: 90%;
 	font-size: 1em !important;
-	padding:15px 0;
+	padding: 15px 0;
 	text-align: center;
 	align-content: flex-end;
 	border-radius: 10px;
 	margin: 0;
-	background: rgba(255, 255, 255, 0.5);
 }

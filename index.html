@@ -8,13 +8,22 @@
 		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 	<body>
+		<div id="modal_for_display">
+			<button id="close" onClick="close()">X</button>
+			<button id="stop" onClick="stop()">Stop intervals</button>
+			<div id="main_timer"></div>
+					<div id="total_time"></div>
+		</div>
 		<div id="container">
 			<div id="output">
-				<div id="timer_container">
-					<div id="main_timer"></div>
-					<div id="total_time"></div>
-				</div>
-				<button onClick="start(0)">Start intervals</button>
+				<div id="intervals_ui">Waiting for your intervals</div>
+
+
+				<!-- <div id="timer_container">
+
+
+				</div> -->
+				<button id="start" onClick="start(0)">Start intervals</button>
 			</div>
 			<div id="input">
 				<form id="user_input">
@@ -81,13 +90,13 @@
 						</label>
 					</div>
 					<input type="submit" id="user_submit" value="Add interval" />
-					<input type="submit" class="reset" id="reset_intervals" value="Reset intervals" />
-					<input type="submit" class="reset" id="stop_intervals" value="Stop intervals" />
+					<input type="submit" id="reset_intervals" value="Reset intervals" />
+					<!-- <input type="submit" class="reset" id="stop_intervals" value="Stop intervals" /> -->
 				</form>
 
-				<div id="intervals_ui">Waiting for your intervals</div>
-			</div>
+
 			<audio id="beep" src="./sounds/beep.mp3"></audio>
+			</div>
 		</div>
 		<script src="app.js"></script>
 	</body>

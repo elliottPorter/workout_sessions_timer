@@ -10,6 +10,8 @@ const minutes = document.getElementById('minutes');
 const seconds = document.getElementById('seconds');
 const intervals_ui = document.getElementById('intervals_ui');
 const total_time = document.getElementById('total_time');
+const close = document.getElementById('close');
+const modal = document.getElementById('modal_for_display');
 let total_minutes = 0;
 let total_seconds = 0;
 let remaining_seconds = 0;
@@ -18,6 +20,7 @@ let timers = [];
 
 // the function call from the start button
 const start = (num) => {
+	modal.style.setProperty('display', 'block');
 	let intervals_count = timers.length;
 	let count = null;
 	if (num < intervals_count) {
@@ -127,7 +130,12 @@ const showIntervalDescription = () => {
 		: (interval_label.className = 'hidden') && (interval_label.className = 'hidden');
 };
 
+const closeModal = () => {
+	modal.style.setProperty('display', 'none')
+};
+
 // create the event listeners
 user_submit.addEventListener('click', pushTimerOptions, false);
 reset_intervals.addEventListener('click', resetIntervals, false);
 rest_period.addEventListener('change', showIntervalDescription, false);
+close.addEventListener('click', closeModal, false);
