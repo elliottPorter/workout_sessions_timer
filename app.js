@@ -24,6 +24,15 @@ let remaining_seconds = 0;
 let intervals_total_time = 0;
 let timers = [];
 
+// functions to pause and resume the intervals
+const pause_the_intervals = () => {
+	pause = true;
+};
+
+const resume_the_intervals = () => {
+	pause = false;
+};
+
 // the function call from the start button
 const start = (num) => {
 	modal.style.setProperty('display', 'block');
@@ -46,26 +55,31 @@ const start = (num) => {
 
 	// the timer countdown function
 	let countdown = setInterval(() => {
-		count--;
 
-		// if countdown is ending...
-		if (count <= 3 && count > 0) {
-			low_beep.play();
-		} else if (count === 0) {
-			beep.play();
-			main_timer.textContent = 0;
-			clearInterval(countdown);
 
-			if (num === intervals_count + 1) {
-				resetIntervals();
-				return;
+		if (!pause) {
+			// update the UI counter
+			main_timer.textContent = count;
+			main_label.textContent = timers[num].interval;
+			
+			count--;
+
+			// if countdown is ending...
+			if (count <= 3 && count > 0) {
+				low_beep.play();
+			} else if (count === 0) {
+				beep.play();
+				main_timer.textContent = 0;
+				clearInterval(countdown);
+
+				if (num === intervals_count + 1) {
+					resetIntervals();
+					return;
+				}
+				// check the index parameter value and use for recursion
+				start(num + 1);
 			}
-			// check the index parameter value and use for recursion
-			start(num + 1);
 		}
-		// update the UI counter
-		main_timer.textContent = count;
-		main_label.textContent = timers[num].interval;
 	}, 1000);
 };
 
@@ -149,7 +163,7 @@ const closeModal = () => {
 user_submit.addEventListener('click', pushTimerOptions, false);
 reset_intervals.addEventListener('click', resetIntervals, false);
 rest_period.addEventListener('change', showIntervalDescription, false);
-pause_intervals.addEventListener('change', pause_the_intervals, false);
-resume_intervals.addEventListener('change', resume_the_intervals, false);
+pause_intervals.addEventListener('click', pause_the_intervals, false);
+resume_intervals.addEventListener('click', resume_the_intervals, false);
 close.addEventListener('click', closeModal, false);
 stop.addEventListener('click', resetIntervals, false);
