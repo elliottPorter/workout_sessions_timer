@@ -15,6 +15,9 @@ const total_time = document.getElementById('total_time');
 const close = document.getElementById('close');
 const modal = document.getElementById('modal_for_display');
 const stop = document.getElementById('stop');
+const pause_intervals = document.getElementById('pause_intervals');
+const resume_intervals = document.getElementById('resume_intervals');
+let pause = false;
 let total_minutes = 0;
 let total_seconds = 0;
 let remaining_seconds = 0;
@@ -123,7 +126,7 @@ const pushTimerOptions = (e) => {
 
 	// update the intervals ui
 	intervals_ui.innerHTML = intervals_output.join('');
-	console.log(timers)
+	console.log(timers);
 };
 
 const resetIntervals = () => {
@@ -146,5 +149,7 @@ const closeModal = () => {
 user_submit.addEventListener('click', pushTimerOptions, false);
 reset_intervals.addEventListener('click', resetIntervals, false);
 rest_period.addEventListener('change', showIntervalDescription, false);
+pause_intervals.addEventListener('change', pause_the_intervals, false);
+resume_intervals.addEventListener('change', resume_the_intervals, false);
 close.addEventListener('click', closeModal, false);
 stop.addEventListener('click', resetIntervals, false);
