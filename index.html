@@ -9,10 +9,11 @@
 	</head>
 	<body>
 		<div id="modal_for_display">
-			<button id="close" onClick="close()">X</button>
-			<button id="stop" onClick="stop()">Stop intervals</button>
+			<button id="close">X</button>
+			<button id="stop">Stop intervals</button>
+			<div id="main_label"></div>
 			<div id="main_timer"></div>
-					<div id="total_time"></div>
+			<div id="total_time"></div>
 		</div>
 		<div id="container">
 			<div id="output">
@@ -31,13 +32,13 @@
 						<label for="rest_period"
 							>Rest?
 							<select id="rest_period">
-								<option value="true" selected="selected">Yes</option>
-								<option value="false">No</option>
+								<option value="false" selected="selected">No</option>
+								<option value="true">Yes</option>
 							</select>
 						</label>
-						<label id="interval_label" for="interval_label" class="hidden"
+						<label id="interval_label" for="interval_description"
 							>Label
-							<input id="interval_description" class="hidden" />
+							<input id="interval_description" />
 						</label>
 					</div>
 					<div>
@@ -50,6 +51,11 @@
 								<option value="3">3</option>
 								<option value="4">4</option>
 								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
 							</select>
 						</label>
 						<label for="seconds"
@@ -86,6 +92,35 @@
 								<option value="28">28</option>
 								<option value="29">29</option>
 								<option value="30">30</option>
+								<option value="31">31</option>
+								<option value="32">32</option>
+								<option value="33">33</option>
+								<option value="34">34</option>
+								<option value="35">35</option>
+								<option value="36">36</option>
+								<option value="37">37</option>
+								<option value="38">38</option>
+								<option value="39">39</option>
+								<option value="40">40</option>
+								<option value="41">41</option>
+								<option value="42">42</option>
+								<option value="43">43</option>
+								<option value="44">44</option>
+								<option value="45">45</option>
+								<option value="46">46</option>
+								<option value="47">47</option>
+								<option value="48">48</option>
+								<option value="49">49</option>
+								<option value="50">50</option>
+								<option value="51">51</option>
+								<option value="52">52</option>
+								<option value="53">53</option>
+								<option value="54">54</option>
+								<option value="55">55</option>
+								<option value="56">56</option>
+								<option value="57">57</option>
+								<option value="58">58</option>
+								<option value="59">59</option>
 							</select>
 						</label>
 					</div>
@@ -96,6 +131,7 @@
 
 
 			<audio id="beep" src="./sounds/beep.mp3"></audio>
+			<audio id="low_beep" src="./sounds/Robot_blip-Marianne_Gagnon-120342607.mp3"></audio>
 			</div>
 		</div>
 		<script src="app.js"></script>

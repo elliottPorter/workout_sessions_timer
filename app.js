@@ -1,6 +1,8 @@
 // create the variables
 const main_timer = document.getElementById('main_timer');
+const main_label = document.getElementById('main_label');
 const beep = document.getElementById('beep');
+const low_beep = document.getElementById('low_beep');
 const user_submit = document.getElementById('user_submit');
 const reset_intervals = document.getElementById('reset_intervals');
 const interval_label = document.getElementById('interval_label');
@@ -12,6 +14,7 @@ const intervals_ui = document.getElementById('intervals_ui');
 const total_time = document.getElementById('total_time');
 const close = document.getElementById('close');
 const modal = document.getElementById('modal_for_display');
+const stop = document.getElementById('stop');
 let total_minutes = 0;
 let total_seconds = 0;
 let remaining_seconds = 0;
@@ -43,7 +46,9 @@ const start = (num) => {
 		count--;
 
 		// if countdown is ending...
-		if (count === 0) {
+		if (count <= 3 && count > 0) {
+			low_beep.play();
+		} else if (count === 0) {
 			beep.play();
 			main_timer.textContent = 0;
 			clearInterval(countdown);
@@ -57,6 +62,7 @@ const start = (num) => {
 		}
 		// update the UI counter
 		main_timer.textContent = count;
+		main_label.textContent = timers[num].interval;
 	}, 1000);
 };
 
@@ -72,15 +78,15 @@ const pushTimerOptions = (e) => {
 
 	// increase the total seconds for each interval submitted
 	intervals_total_time += totalSeconds;
-	console.log(intervals_total_time);
+	// console.log(intervals_total_time);
 
 	// function to create total time with minutes and remaining seconds
 	const create_total_time_for_ui = (seconds) => {
-		console.log(`Passed in: ${seconds}`);
+		// console.log(`Passed in: ${seconds}`);
 
 		total_minutes = Math.floor(parseInt(seconds) / 60);
 
-		console.log(total_minutes);
+		// console.log(total_minutes);
 
 		remaining_seconds = seconds %= 60;
 
@@ -92,7 +98,7 @@ const pushTimerOptions = (e) => {
 
 	// send the interval content to the array
 	timers.push({
-		interval: interval_description.value,
+		interval: rest ? 'Rest' : interval_description.value,
 		rest: rest,
 		minutes: minutes.value,
 		seconds: seconds.value,
@@ -117,9 +123,11 @@ const pushTimerOptions = (e) => {
 
 	// update the intervals ui
 	intervals_ui.innerHTML = intervals_output.join('');
+	console.log(timers)
 };
 
 const resetIntervals = () => {
+	console.log('stop button clicked');
 	timers = [];
 	intervals_ui.innerHTML = 'Waiting for your intervals';
 };
@@ -131,7 +139,7 @@ const showIntervalDescription = () => {
 };
 
 const closeModal = () => {
-	modal.style.setProperty('display', 'none')
+	modal.style.setProperty('display', 'none');
 };
 
 // create the event listeners
@@ -139,3 +147,4 @@ user_submit.addEventListener('click', pushTimerOptions, false);
 reset_intervals.addEventListener('click', resetIntervals, false);
 rest_period.addEventListener('change', showIntervalDescription, false);
 close.addEventListener('click', closeModal, false);
+stop.addEventListener('click', resetIntervals, false);

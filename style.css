@@ -28,8 +28,8 @@ body {
 	display: none;
 	height: 90vh;
 	z-index: 666;
-	left:5%;
-	background-color:orange;
+	left: 5%;
+	background-color: orange;
 	border-radius: 10px;
 }
 
@@ -145,7 +145,7 @@ button#start:hover {
 }
 
 button#stop {
-	position:absolute;
+	position: absolute;
 	font-size: 1.5em;
 	border: none;
 	background: #222;
@@ -155,21 +155,21 @@ button#stop {
 	font-family: Roboto_mono_bold, sans-serif;
 	width: 90%;
 	display: block;
-	left:5%;
+	left: 5%;
 	cursor: pointer;
-	bottom:0;
+	bottom: 0;
 }
 
 button#close {
-	border-radius:50px;
-	background-color:#fff;
-	position:absolute;
-	width:50px;
-	height:50px;
-	right:5%;
-	top:5%;
-	color:#222;
-	font-size:70%;
+	border-radius: 50px;
+	background-color: #fff;
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	right: 5%;
+	top: 5%;
+	color: #222;
+	font-size: 70%;
 }
 
 button#stop:hover {
@@ -177,9 +177,9 @@ button#stop:hover {
 	color: orange;
 }
 
-div {
+/* div {
 	margin-bottom: 20px;
-}
+} */
 
 .hidden {
 	display: none;
@@ -191,7 +191,7 @@ div {
 
 .row {
 	width: 100%;
-	padding: 5% 0 0 0;
+	padding: 0 0 20px 0;
 	margin: 0;
 }
 
@@ -200,27 +200,33 @@ div {
 	display: block;
 	border-radius: 10px;
 	background: #fff;
-	padding: 20px 0;
 	color: orange;
 	text-align: center;
+	padding: 30px 0;
 }
 
 #intervals_ui div.min {
 	display: inline-block;
 	width: 12%;
 	text-align: left;
+	border-bottom: 2px dotted #ccc;
+	padding: 0px 0 15px;
 }
 
 #intervals_ui div.sec {
 	display: inline-block;
 	width: 20%;
 	text-align: left;
+	border-bottom: 2px dotted #ccc;
+	padding: 0px 0 15px;
 }
 
 #intervals_ui div.interval {
 	display: inline-block;
 	width: 55%;
 	text-align: left;
+	border-bottom: 2px dotted #ccc;
+	padding: 0px 0 15px;
 }
 
 #timer_container {
@@ -232,6 +238,14 @@ div {
 	display: flex;
 }
 
+#main_label {
+	width: 100%;
+	font-size: 3em;
+	text-align: center;
+	color: #fff;
+	margin-top:40px;
+}
+
 #main_timer {
 	width: 100%;
 	font-size: 5em;
@@ -240,7 +254,7 @@ div {
 }
 
 #total_time {
-	width: 90%;
+	width: 100%;
 	font-size: 1em !important;
 	padding: 15px 0;
 	text-align: center;
