@@ -12,11 +12,11 @@ const minutes = document.getElementById('minutes');
 const seconds = document.getElementById('seconds');
 const intervals_ui = document.getElementById('intervals_ui');
 const total_time = document.getElementById('total_time');
-const close = document.getElementById('close');
+const close_modal = document.getElementById('close');
 const modal = document.getElementById('modal_for_display');
-const stop = document.getElementById('stop');
-const pause_intervals = document.getElementById('pause_intervals');
-const resume_intervals = document.getElementById('resume_intervals');
+const stop_button = document.getElementById('stop');
+const pause_button = document.getElementById('pause_intervals');
+const resume_button = document.getElementById('resume_intervals');
 let pause = false;
 let total_minutes = 0;
 let total_seconds = 0;
@@ -34,14 +34,14 @@ const resume_the_intervals = () => {
 };
 
 // the function call from the start button
-const start = (num) => {
+const start_the_intervals = (num) => {
 	modal.style.setProperty('display', 'block');
 	let intervals_count = timers.length;
 	let count = null;
 	if (num < intervals_count) {
 		count = Number(timers[num].totalSeconds);
 	} else if (num === intervals_count--) {
-		resetIntervals();
+		reset_the_intervals();
 		return;
 	}
 
@@ -58,10 +58,6 @@ const start = (num) => {
 
 
 		if (!pause) {
-			// update the UI counter
-			main_timer.textContent = count;
-			main_label.textContent = timers[num].interval;
-			
 			count--;
 
 			// if countdown is ending...
@@ -73,18 +69,21 @@ const start = (num) => {
 				clearInterval(countdown);
 
 				if (num === intervals_count + 1) {
-					resetIntervals();
+					reset_the_intervals();
 					return;
 				}
 				// check the index parameter value and use for recursion
-				start(num + 1);
+				start_the_intervals(num + 1);
 			}
+			// update the UI counter
+			main_timer.textContent = count;
+			main_label.textContent = timers[num].interval;
 		}
 	}, 1000);
 };
 
 // send the intervals entered into the array
-const pushTimerOptions = (e) => {
+const push_timer_options = (e) => {
 	e.preventDefault();
 
 	// transform the time entry into seconds
@@ -143,27 +142,26 @@ const pushTimerOptions = (e) => {
 	console.log(timers);
 };
 
-const resetIntervals = () => {
-	console.log('stop button clicked');
+const reset_the_intervals = () => {
 	timers = [];
 	intervals_ui.innerHTML = 'Waiting for your intervals';
 };
 
-const showIntervalDescription = () => {
+const show_interval_description = () => {
 	rest_period.value === 'false'
 		? (interval_label.className = 'show') && (interval_description.className = 'show')
 		: (interval_label.className = 'hidden') && (interval_label.className = 'hidden');
 };
 
-const closeModal = () => {
+const close_the_modal = () => {
 	modal.style.setProperty('display', 'none');
 };
 
 // create the event listeners
-user_submit.addEventListener('click', pushTimerOptions, false);
-reset_intervals.addEventListener('click', resetIntervals, false);
-rest_period.addEventListener('change', showIntervalDescription, false);
-pause_intervals.addEventListener('click', pause_the_intervals, false);
-resume_intervals.addEventListener('click', resume_the_intervals, false);
-close.addEventListener('click', closeModal, false);
-stop.addEventListener('click', resetIntervals, false);
+user_submit.addEventListener('click', push_timer_options, false);
+reset_intervals.addEventListener('click', reset_the_intervals, false);
+rest_period.addEventListener('change', show_interval_description, false);
+pause_button.addEventListener('click', pause_the_intervals, false);
+resume_button.addEventListener('click', resume_the_intervals, false);
+close_modal.addEventListener('click', close_the_modal, false);
+reset_intervals.addEventListener('click', reset_the_intervals, false);
