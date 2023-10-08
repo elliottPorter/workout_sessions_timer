@@ -10,18 +10,19 @@ const interval_description = document.getElementById('interval_description');
 const rest_period = document.getElementById('rest_period');
 const minutes = document.getElementById('minutes');
 const seconds = document.getElementById('seconds');
-const intervals_ui = document.getElementById('intervals_ui');
+const interval_ui = document.getElementById('interval_ui');
 const total_time = document.getElementById('total_time');
 const close_modal = document.getElementById('close');
 const modal = document.getElementById('modal_for_display');
 const stop_button = document.getElementById('stop');
-const pause_button = document.getElementById('pause_intervals');
-const resume_button = document.getElementById('resume_intervals');
+const pause_button = document.getElementById('pause_timer');
+const resume_button = document.getElementById('resume_timer');
+const next_timer = document.getElementById('next_timer');
 let pause = false;
 let total_minutes = 0;
 let total_seconds = 0;
 let remaining_seconds = 0;
-let intervals_total_time = 0;
+let interval_total_time = 0;
 let timers = [];
 
 // functions to pause and resume the intervals
@@ -36,48 +37,65 @@ const resume_the_intervals = () => {
 // the function call from the start button
 const start_the_intervals = (num) => {
 	modal.style.setProperty('display', 'block');
-	let intervals_count = timers.length;
+	let interval_count = timers.length;
 	let count = null;
-	if (num < intervals_count) {
+	if (num < interval_count) {
 		count = Number(timers[num].totalSeconds);
-	} else if (num === intervals_count--) {
-		reset_the_intervals();
-		return;
 	}
 
-	// update the UI counter
-	main_timer.textContent = count;
+	// create the minutes and seconds for the UI
+	let ui_minutes = Math.floor(count / 60);
+	let ui_seconds = Math.floor(count % 60);
 
-	// add a second to every interval after first interval...
-	if (num !== 0) {
+	let count_for_ui = `${ui_minutes}m ${ui_seconds}s`;
+
+	// update the UI counter
+	main_label.textContent = timers[num].interval_label;
+	main_timer.textContent = count_for_ui;
+
+	// set the next interval UI
+	if (num < interval_count - 1) {
+		next_timer.textContent = `Up next: ${timers[num + 1].interval_label}`;
+	} else if (num === interval_count - 1) {
+		next_timer.textContent = `Final interval`;
+	}
+
+	// add a second to all but the first interval
+	if (num != 0) {
 		count++;
 	}
 
 	// the timer countdown function
 	let countdown = setInterval(() => {
-
+		// decrease the total seconds by 1
+		count--;
 
 		if (!pause) {
-			count--;
-
-			// if countdown is ending...
+			// if countdown is ending ( 3 seconds left ) play beeps
 			if (count <= 3 && count > 0) {
 				low_beep.play();
 			} else if (count === 0) {
 				beep.play();
-				main_timer.textContent = 0;
-				clearInterval(countdown);
-
-				if (num === intervals_count + 1) {
-					reset_the_intervals();
-					return;
-				}
 				// check the index parameter value and use for recursion
-				start_the_intervals(num + 1);
+				if (num < interval_count - 1) {
+					clearInterval(countdown);
+					start_the_intervals(num + 1);
+				} else if (num === interval_count - 1) {
+					clearInterval(countdown);
+					next_timer.textContent = `Session complete`;
+					reset_the_intervals();
+				}
 			}
+
+			let ui_minutes = Math.floor(count / 60);
+			let ui_seconds = Math.floor(count % 60);
+
+			let count_for_ui = `${ui_minutes}m ${ui_seconds}s`;
+
 			// update the UI counter
-			main_timer.textContent = count;
-			main_label.textContent = timers[num].interval;
+			// main_label.textContent = timers[num].interval_label;
+			main_timer.textContent = count_for_ui;
+			// next_timer.textContent = num < interval_count-- ? `Up next: ${timers[num++].interval_label}` : `Final interval`;
 		}
 	}, 1000);
 };
@@ -93,13 +111,10 @@ const push_timer_options = (e) => {
 	let rest = rest_period.value === 'true' ? true : false;
 
 	// increase the total seconds for each interval submitted
-	intervals_total_time += totalSeconds;
-	// console.log(intervals_total_time);
+	interval_total_time += totalSeconds;
 
 	// function to create total time with minutes and remaining seconds
 	const create_total_time_for_ui = (seconds) => {
-		// console.log(`Passed in: ${seconds}`);
-
 		total_minutes = Math.floor(parseInt(seconds) / 60);
 
 		// console.log(total_minutes);
@@ -110,11 +125,11 @@ const push_timer_options = (e) => {
 	};
 
 	// update the total time in ui
-	total_time.innerHTML = create_total_time_for_ui(intervals_total_time);
+	total_time.innerHTML = create_total_time_for_ui(interval_total_time);
 
 	// send the interval content to the array
 	timers.push({
-		interval: rest ? 'Rest' : interval_description.value,
+		interval_label: rest ? 'Rest' : interval_description.value,
 		rest: rest,
 		minutes: minutes.value,
 		seconds: seconds.value,
@@ -122,10 +137,10 @@ const push_timer_options = (e) => {
 	});
 
 	// send the intervals into a new array and create a total time for all intervals
-	let intervals_output = timers.map((timer) => {
+	let interval_output = timers.map((timer) => {
 		return `<div class="row">
 <div class="interval">
-				${timer.interval}
+				${timer.interval_label}
 			</div>
 		<div class="min">
 				${timer.minutes}m
@@ -138,13 +153,12 @@ const push_timer_options = (e) => {
 	});
 
 	// update the intervals ui
-	intervals_ui.innerHTML = intervals_output.join('');
-	console.log(timers);
+	interval_ui.innerHTML = interval_output.join('');
 };
 
 const reset_the_intervals = () => {
 	timers = [];
-	intervals_ui.innerHTML = 'Waiting for your intervals';
+	interval_ui.innerHTML = 'Waiting for your intervals';
 };
 
 const show_interval_description = () => {
