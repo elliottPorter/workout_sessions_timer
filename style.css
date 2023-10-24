@@ -33,6 +33,20 @@ body {
 	border-radius: 10px;
 }
 
+#modal_start {
+	position: relative;
+	width: 50vw;
+	display: none;
+	height: 50vh;
+	margin:40px auto;
+	background-color: #fff;
+	border-radius: 50px;
+	color:#222;
+	text-align:center;
+	font-size: 2em;
+	margin-top:30px;
+}
+
 #container {
 	position: absolute;
 	width: 90%;
@@ -256,14 +270,15 @@ button#stop:hover {
 
 #main_timer {
 	width: 100%;
-	font-size: 3.5em;
+	font-size: 4em;
 	color: #fff;
 	text-align: center;
+	font-family:Roboto_mono_bold;
 }
 
 #next_timer {
 	width: 100%;
-	font-size: 4em;
+	font-size: 2.2em;
 	color: #222;
 	text-align: center;
 }

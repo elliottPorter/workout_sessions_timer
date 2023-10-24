@@ -17,21 +17,20 @@
 			<div id="total_time"></div>
 
 			<div id="buttons_container">
-			<button id="pause_timer">Pause</button>
-			<button id="resume_timer">Resume</button>
+				<button id="pause_timer">Pause</button>
+				<button id="resume_timer">Resume</button>
 			</div>
-
 		</div>
+		<div id="modal_start"></div>
 		<div id="container">
 			<div id="output">
 				<div id="interval_ui">Waiting for your intervals</div>
-
 
 				<!-- <div id="timer_container">
 
 
 				</div> -->
-				<button id="start" onClick="start_the_intervals(0)">Start intervals</button>
+				<button id="start" onClick="countdown_start(0)">Start intervals</button>
 			</div>
 			<div id="input">
 				<form id="user_input">
@@ -136,9 +135,8 @@
 					<!-- <input type="submit" class="reset" id="stop_intervals" value="Stop intervals" /> -->
 				</form>
 
-
-			<audio id="beep" src="./sounds/beep.mp3"></audio>
-			<audio id="low_beep" src="./sounds/Robot_blip-Marianne_Gagnon-120342607.mp3"></audio>
+				<audio id="beep" src="./sounds/beep.mp3"></audio>
+				<audio id="low_beep" src="./sounds/Robot_blip-Marianne_Gagnon-120342607.mp3"></audio>
 			</div>
 		</div>
 		<script src="app.js"></script>
