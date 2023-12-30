@@ -74,6 +74,7 @@ const start_the_intervals = (num) => {
 	let ui_minutes = Math.floor(count / 60);
 	let ui_seconds = Math.floor(count % 60);
 
+	// the output for the UI minutes and seconds
 	let count_for_ui = `${ui_minutes}m ${ui_seconds}s`;
 
 	// update the UI counter
@@ -93,11 +94,15 @@ const start_the_intervals = (num) => {
 	}
 
 	// the timer countdown function
-	let countdown = setInterval(() => {
-		// decrease the total seconds by 1
-		count--;
 
-		if (!pause) {
+	let countdown = setInterval(() => {
+
+		// check to ensure we are not paused first
+		if (pause === false) {
+
+			// decrease the total seconds by 1
+			count--;
+
 			// if countdown is ending ( 3 seconds left ) play beeps
 			if (count <= 3 && count > 0) {
 				low_beep.play();
@@ -106,6 +111,7 @@ const start_the_intervals = (num) => {
 				// check the index parameter value and use for recursion
 				if (num < interval_count - 1) {
 					clearInterval(countdown);
+
 					start_the_intervals(num + 1);
 				} else if (num === interval_count - 1) {
 					clearInterval(countdown);
@@ -113,7 +119,6 @@ const start_the_intervals = (num) => {
 					reset_the_intervals();
 				}
 			}
-
 			let ui_minutes = Math.floor(count / 60);
 			let ui_seconds = Math.floor(count % 60);
 
