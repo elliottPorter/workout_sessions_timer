@@ -163,15 +163,20 @@ const push_timer_options = (e) => {
 	});
 
 	// hide the start button until there is an interval
-	timers.length !== 0
-		? start_button.style.setProperty('display', 'block')
-		: null;
+	timers.length !== 0 ? start_button.style.setProperty('display', 'block') : null;
 
 	// reset the pause and resume buttons container to display after first sessions end
 	pause_resume_buttons.style.setProperty('display', 'flex');
 
-	// send the intervals into a new array and create a total time for all intervals
-	let interval_output = timers.map((timer) => {
+	// call the intervals ui
+	build_the_intervals_list_ui();
+
+
+};
+
+// function to create the intervals ui
+const build_the_intervals_list_ui = () => {
+	const interval_output = timers.map((timer, index) => {
 		return `<div class="row">
 		<div class="interval">
 				${timer.interval_label}
@@ -182,12 +187,29 @@ const push_timer_options = (e) => {
 			<div class="sec">
 				${timer.seconds}s
 			</div>
-
+			<div class="remove" id=${index}>
+				X
+			</div>
 		</div>`;
 	});
 
 	// update the intervals ui
 	interval_ui.innerHTML = interval_output.join('');
+
+	// grab all of the remove buttons from the interval UI list
+	let remove = document.querySelectorAll('.remove');
+
+	// add an event listener to each remove button
+	remove.forEach((item) => {
+		item.addEventListener('click', remove_item_from_array, false);
+	});
+};
+
+// remove the selected interval from the array
+const remove_item_from_array = (e) => {
+	const e_id = Number(e.target.getAttribute('id'));
+	timers.splice(e_id, 1);
+	build_the_intervals_list_ui();
 };
 
 const reset_the_intervals = () => {
@@ -195,7 +217,7 @@ const reset_the_intervals = () => {
 	interval_ui.innerHTML = 'Waiting for your intervals';
 	total_time.innerHTML = '';
 	interval_total_time = 0;
-	pause_resume_buttons.style.setProperty('display', 'none')
+	pause_resume_buttons.style.setProperty('display', 'none');
 };
 
 const show_interval_description = () => {
