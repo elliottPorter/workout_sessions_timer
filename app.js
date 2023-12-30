@@ -1,4 +1,5 @@
 // create the variables
+//#region for variables
 const main_timer = document.getElementById('main_timer');
 const main_label = document.getElementById('main_label');
 const beep = document.getElementById('beep');
@@ -26,6 +27,7 @@ let total_seconds = 0;
 let remaining_seconds = 0;
 let interval_total_time = 0;
 let timers = [];
+//#endregion
 
 // functions to pause and resume the intervals
 const pause_the_intervals = () => {
