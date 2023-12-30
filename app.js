@@ -20,6 +20,7 @@ const start_button = document.getElementById('start');
 const stop_button = document.getElementById('stop');
 const pause_button = document.getElementById('pause_timer');
 const resume_button = document.getElementById('resume_timer');
+const pause_resume_buttons = document.getElementById('buttons_container');
 const next_timer = document.getElementById('next_timer');
 const start_count = 5;
 let pause = false;
@@ -104,13 +105,12 @@ const start_the_intervals = (num) => {
 
 			// if countdown is ending ( 3 seconds left ) play beeps
 			if (count <= 3 && count > 0) {
-				low_beep.play();
+				// low_beep.play();
 			} else if (count === 0) {
-				beep.play();
+				// beep.play();
 				// check the index parameter value and use for recursion
 				if (num < interval_count - 1) {
 					clearInterval(countdown);
-
 					start_the_intervals(num + 1);
 				} else if (num === interval_count - 1) {
 					clearInterval(countdown);
@@ -167,6 +167,9 @@ const push_timer_options = (e) => {
 		? start_button.style.setProperty('display', 'block')
 		: null;
 
+	// reset the pause and resume buttons container to display after first sessions end
+	pause_resume_buttons.style.setProperty('display', 'flex');
+
 	// send the intervals into a new array and create a total time for all intervals
 	let interval_output = timers.map((timer) => {
 		return `<div class="row">
@@ -190,6 +193,9 @@ const push_timer_options = (e) => {
 const reset_the_intervals = () => {
 	timers = [];
 	interval_ui.innerHTML = 'Waiting for your intervals';
+	total_time.innerHTML = '';
+	interval_total_time = 0;
+	pause_resume_buttons.style.setProperty('display', 'none')
 };
 
 const show_interval_description = () => {
