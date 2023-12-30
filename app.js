@@ -16,6 +16,7 @@ const total_time = document.getElementById('total_time');
 const close_modal = document.getElementById('close');
 const modal = document.getElementById('modal_for_display');
 const modal_start = document.getElementById('modal_start');
+const start_button = document.getElementById('start');
 const stop_button = document.getElementById('stop');
 const pause_button = document.getElementById('pause_timer');
 const resume_button = document.getElementById('resume_timer');
@@ -96,10 +97,8 @@ const start_the_intervals = (num) => {
 	// the timer countdown function
 
 	let countdown = setInterval(() => {
-
 		// check to ensure we are not paused first
 		if (pause === false) {
-
 			// decrease the total seconds by 1
 			count--;
 
@@ -162,6 +161,11 @@ const push_timer_options = (e) => {
 		seconds: seconds.value,
 		totalSeconds: totalSeconds,
 	});
+
+	// hide the start button until there is an interval
+	timers.length !== 0
+		? start_button.style.setProperty('display', 'block')
+		: null;
 
 	// send the intervals into a new array and create a total time for all intervals
 	let interval_output = timers.map((timer) => {

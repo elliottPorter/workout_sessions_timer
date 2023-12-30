@@ -148,9 +148,12 @@ button {
 	padding: 0.2em 0;
 	font-family: Roboto_mono_bold, sans-serif;
 	width: 100%;
-	display: block;
 	margin: 20px auto 20px auto;
 	cursor: pointer;
+}
+
+button#start {
+	display: none;
 }
 
 button#start:hover {
