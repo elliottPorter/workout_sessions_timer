@@ -105,9 +105,9 @@ const start_the_intervals = (num) => {
 
 			// if countdown is ending ( 3 seconds left ) play beeps
 			if (count <= 3 && count > 0) {
-				// low_beep.play();
+				low_beep.play();
 			} else if (count === 0) {
-				// beep.play();
+				beep.play();
 				// check the index parameter value and use for recursion
 				if (num < interval_count - 1) {
 					clearInterval(countdown);
@@ -231,6 +231,7 @@ const close_the_modal = () => {
 };
 
 // create the event listeners
+// #region for event listeners
 user_submit.addEventListener('click', push_timer_options, false);
 reset_intervals.addEventListener('click', reset_the_intervals, false);
 rest_period.addEventListener('change', show_interval_description, false);
@@ -238,3 +239,4 @@ pause_button.addEventListener('click', pause_the_intervals, false);
 resume_button.addEventListener('click', resume_the_intervals, false);
 close_modal.addEventListener('click', close_the_modal, false);
 reset_intervals.addEventListener('click', reset_the_intervals, false);
+// #endregion
