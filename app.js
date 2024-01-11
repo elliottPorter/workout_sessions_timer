@@ -177,7 +177,7 @@ const push_timer_options = (e) => {
 // function to create the intervals ui
 const build_the_intervals_list_ui = () => {
 	const interval_output = timers.map((timer, index) => {
-		return `<div class="row">
+		return `<div id=${index} class="row" draggable="true" ondragend="dragEnd()" ondragover="dragOver(event)" ondragstart="dragStart(event)">
 		<div class="interval">
 				${timer.interval_label}
 			</div>
@@ -229,6 +229,37 @@ const show_interval_description = () => {
 const close_the_modal = () => {
 	modal.style.setProperty('display', 'none');
 };
+
+// the drag and drop reorder code
+let selected = null;
+
+function dragOver(e) {
+	if (isBefore(selected, e.target)) {
+		e.target.parentNode.insertBefore(selected, e.target);
+	} else {
+		e.target.parentNode.insertBefore(selected, e.target.nextSibling);
+	}
+}
+
+function dragEnd() {
+	selected = null;
+}
+
+function dragStart(e) {
+	e.dataTransfer.effectAllowed = 'move';
+	e.dataTransfer.setData('text/plain', null);
+	selected = e.target;
+}
+
+function isBefore(el1, el2) {
+	let cur;
+	if (el2.parentNode === el1.parentNode) {
+		for (cur = el1.previousSibling; cur; cur = cur.previousSibling) {
+			if (cur === el2) return true;
+		}
+	}
+	return false;
+}
 
 // create the event listeners
 // #region for event listeners
