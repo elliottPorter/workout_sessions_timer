@@ -57,7 +57,6 @@ const countdown_start = (num) => {
 		} else {
 			clearInterval(get_ready);
 			start_the_intervals(num);
-			return;
 		}
 	}, 1000);
 };
@@ -91,12 +90,11 @@ const start_the_intervals = (num) => {
 	}
 
 	// add a second to all but the first interval
-	if (num != 0) {
+	if (num !== 0) {
 		count++;
 	}
 
 	// the timer countdown function
-
 	let countdown = setInterval(() => {
 		// check to ensure we are not paused first
 		if (pause === false) {
@@ -133,45 +131,45 @@ const start_the_intervals = (num) => {
 const push_timer_options = (e) => {
 	e.preventDefault();
 
-	// transform the time entry into seconds
-	let totalSeconds = parseInt(seconds.value) + parseInt(minutes.value) * 60;
+// transform the time entry into seconds
+let totalSeconds = parseInt(seconds.value) + parseInt(minutes.value) * 60;
 
-	// is this a rest period?
-	let rest = rest_period.value === 'true' ? true : false;
+// is this a rest period?
+let rest = rest_period.value === 'true' ? true : false;
 
-	// increase the total seconds for each interval submitted
-	interval_total_time += totalSeconds;
+// increase the total seconds for each interval submitted
+interval_total_time += totalSeconds;
 
-	// function to create total time with minutes and remaining seconds
-	const create_total_time_for_ui = (seconds) => {
-		total_minutes = Math.floor(parseInt(seconds) / 60);
-		remaining_seconds = seconds %= 60;
+// function to create total time with minutes and remaining seconds
+const create_total_time_for_ui = (seconds) => {
+	total_minutes = Math.floor(parseInt(seconds) / 60);
+	remaining_seconds = seconds %= 60;
 
-		return `Total time: ${total_minutes}m : ${remaining_seconds}s`;
-	};
+	return `Total time: ${total_minutes}m : ${remaining_seconds}s`;
+};
 
-	// update the total time in ui
-	total_time.innerHTML = create_total_time_for_ui(interval_total_time);
+// update the total time in ui
+total_time.innerHTML = create_total_time_for_ui(interval_total_time);
 
-	// send the interval content to the array
-	timers.push({
+// send the interval content to the array
+timers.push({
 		interval_label: rest ? 'Rest' : interval_description.value,
 		rest: rest,
 		minutes: minutes.value,
 		seconds: seconds.value,
 		totalSeconds: totalSeconds,
-	});
-
+			});
+	
 	// hide the start button until there is an interval
 	timers.length !== 0 ? start_button.style.setProperty('display', 'block') : null;
-
+	
 	// reset the pause and resume buttons container to display after first sessions end
 	pause_resume_buttons.style.setProperty('display', 'flex');
-
+	
+	console.log('The timer array is ', timers);
+	
 	// call the intervals ui
 	build_the_intervals_list_ui();
-
-
 };
 
 // function to create the intervals ui
@@ -193,14 +191,14 @@ const build_the_intervals_list_ui = () => {
 		</div>`;
 	});
 
-	// update the intervals ui
-	interval_ui.innerHTML = interval_output.join('');
+// update the intervals ui
+interval_ui.innerHTML = interval_output.join('');
 
-	// grab all of the remove buttons from the interval UI list
-	let remove = document.querySelectorAll('.remove');
+// grab all of the remove buttons from the interval UI list
+let remove = document.querySelectorAll('.remove');
 
-	// add an event listener to each remove button
-	remove.forEach((item) => {
+// add an event listener to each remove button
+remove.forEach((item) => {
 		item.addEventListener('click', remove_item_from_array, false);
 	});
 };
