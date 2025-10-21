@@ -215,8 +215,15 @@ button#stop:hover {
 
 .row {
 	width: 100%;
-	padding: 0 0 20px 0;
+	padding:12px 0 0 0;
 	margin: 0;
+	display:block;
+	cursor:grab;
+}
+
+.row:hover {
+	cursor:grab;
+	background-color:#222;
 }
 
 #interval_ui {

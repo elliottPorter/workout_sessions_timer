@@ -160,9 +160,7 @@ timers.push({
 		totalSeconds: totalSeconds,
 			});
 	
-	// hide the start button until there is an interval
-	timers.length !== 0 ? start_button.style.setProperty('display', 'block') : null;
-	
+	console.log(typeof interval_label)
 	// reset the pause and resume buttons container to display after first sessions end
 	pause_resume_buttons.style.setProperty('display', 'flex');
 	
@@ -174,22 +172,30 @@ timers.push({
 
 // function to create the intervals ui
 const build_the_intervals_list_ui = () => {
-	const interval_output = timers.map((timer, index) => {
-		return `<div id=${index} class="row" draggable="true" ondragend="dragEnd()" ondragover="dragOver(event)" ondragstart="dragStart(event)">
+	
+	// hide the start button until there is an interval
+	if(timers.length > 0){
+		start_button.style.setProperty('display', 'block');
+	} else {
+		reset_the_intervals();
+	}
+	
+		const interval_output = timers.map((timer, index) => {
+			return `<div id=${ index } class="row" draggable="true" ondragend="dragEnd()" ondragover="dragOver(event)" ondragstart="dragStart(event)">
 		<div class="interval">
-				${timer.interval_label}
+				${ timer.interval_label }
 			</div>
 		<div class="min">
-				${timer.minutes}m
+				${ timer.minutes }m
 			</div>
 			<div class="sec">
-				${timer.seconds}s
+				${ timer.seconds }s
 			</div>
-			<div class="remove" id=${index}>
+			<div class="remove" id=${ index }>
 				X
 			</div>
 		</div>`;
-	});
+		});
 
 // update the intervals ui
 interval_ui.innerHTML = interval_output.join('');
@@ -212,11 +218,14 @@ const remove_item_from_array = (e) => {
 
 const reset_the_intervals = () => {
 	timers = [];
+	start_button.style.setProperty('display', 'none');
 	interval_ui.innerHTML = 'Waiting for your intervals';
 	total_time.innerHTML = '';
 	interval_total_time = 0;
 	pause_resume_buttons.style.setProperty('display', 'none');
 };
+
+console.log(typeof pause_resume_buttons);
 
 const show_interval_description = () => {
 	rest_period.value === 'false'
@@ -230,6 +239,8 @@ const close_the_modal = () => {
 
 // the drag and drop reorder code
 let selected = null;
+
+console.log(typeof selected);
 
 function dragOver(e) {
 	if (isBefore(selected, e.target)) {
