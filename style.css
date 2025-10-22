@@ -223,17 +223,32 @@ button#stop:hover {
 
 .draggable:hover {
   cursor: grab;
-  background-color: #222;
+  background-color: orange;
+  color:#fff;
+}
+
+.draggable:active {
+    cursor: grabbing; /* Changes cursor when actively dragging */
 }
 
 .draggable.dragging {
-	background-color:red;
+	opacity:0.4;
 }
 
 .is-dragging * {
 	cursor: grabbing !important;
   cursor: -webkit-grabbing !important;
   cursor: -moz-grabbing !important;
+}
+
+/* Visual cue for dropping above a target */
+.draggable.drop-target-above {
+    border-top: 3px solid orange; /* orange line at the top */
+}
+
+/* Visual cue for dropping below a target */
+.draggable.drop-target-below {
+    border-bottom: 3px solid orange; /* orange line at the bottom */
 }
 
 #interval_ui {
@@ -251,7 +266,7 @@ button#stop:hover {
   display: inline-block;
   width: 55%;
   text-align: left;
-  border-bottom: 2px dotted #ccc;
+  /* border-bottom: 2px dotted #ccc; */
   padding: 0px 0 15px;
 }
 
@@ -259,7 +274,7 @@ button#stop:hover {
   display: inline-block;
   width: 15%;
   text-align: left;
-  border-bottom: 2px dotted #ccc;
+  /* border-bottom: 2px dotted #ccc; */
   padding: 0px 0 15px;
 }
 
@@ -267,7 +282,7 @@ button#stop:hover {
   display: inline-block;
   width: 15%;
   text-align: left;
-  border-bottom: 2px dotted #ccc;
+  /* border-bottom: 2px dotted #ccc; */
   padding: 0px 0 15px;
 }
 
@@ -275,7 +290,7 @@ button#stop:hover {
   display: inline-block;
   width: 5%;
   text-align: left;
-  border-bottom: 2px dotted #ccc;
+  /* border-bottom: 2px dotted #ccc; */
   padding: 0px 0 15px;
 }
 

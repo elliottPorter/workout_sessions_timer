@@ -78,3 +78,52 @@ function getDragAfterElement(container, y) {
     { offset: Number.NEGATIVE_INFINITY },
   ).element;
 }
+
+
+// ///////////////// version 2
+
+// <div id="list_container" ondragover="handleParentDragOver(event)" ondrop="handleParentDrop(event)"><div id=${index} class="draggable" draggable="true"
+  const draggables = document.querySelectorAll('.draggable');
+
+  draggables.forEach((draggable) => {
+    draggable.addEventListener('dragstart', () => {
+      // console.log('dragging');
+      draggable.classList.add('dragging');
+    });
+
+    draggable.addEventListener('dragend', () => {
+      draggable.classList.remove('dragging');
+    });
+  });
+
+  interval_ui.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    const afterElement = getDragAfterElement(interval_ui, e.clientY);
+    const dragged_item = document.querySelector('.dragging');
+    if (afterElement == null) {
+      interval_ui.appendChild(dragged_item);
+    } else {
+      interval_ui.insertBefore(dragged_item, afterElement);
+    }
+  });
+
+  const getDragAfterElement = (container, y) => {
+    const draggableElements = [
+      ...container.querySelectorAll('.draggable:not(.dragging)'),
+    ];
+    console.log(draggableElements);
+    draggableElements.reduce(
+      (closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child };
+        } else {
+          return closest;
+        }
+      },
+      {
+        offset: Number.NEGATIVE_INFINITY,
+      },
+    ).element;
+  };

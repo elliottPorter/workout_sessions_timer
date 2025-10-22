@@ -208,28 +208,89 @@ const build_the_intervals_list_ui = () => {
   });
 
   // the drag and drop reorder code
-  // <div id="list_container" ondragover="handleParentDragOver(event)" ondrop="handleParentDrop(event)"><div id=${index} class="draggable" draggable="true"
-  const draggables = document.querySelectorAll('.draggable');
-  const draggable_container = document.querySelectorAll('list_container');
+  const container = document.getElementById('interval_ui');
+let draggedItem = null; // To store the element being dragged
 
-  console.log(draggables);
-
-  draggables.forEach((draggable) => {
-    draggable.addEventListener('dragstart', () => {
-      console.log('dragging');
-      draggable.classList.add('dragging');
+/**
+ * Attaches drag and drop event listeners to all existing and new draggable items.
+ */
+function addDragListeners(draggableElement) {
+    // DRAG START
+    draggableElement.addEventListener('dragstart', (e) => {
+        draggedItem = draggableElement;
+        // The dataTransfer object is necessary for drag-and-drop to work,
+        // even if no data is actually transferred.
+        e.dataTransfer.setData('text/plain', e.target.id);
+        // Add a class for visual feedback during the drag
+        setTimeout(() => draggableElement.classList.add('dragging'), 0);
     });
 
-    draggable.addEventListener('dragend', () => {
-      draggable.classList.remove('dragging');
+    // DRAG END
+    draggableElement.addEventListener('dragend', () => {
+        draggedItem = null;
+        // Remove the visual feedback class
+        draggableElement.classList.remove('dragging');
     });
-  });
 
-  interval_ui.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    const dragged_item = document.querySelector('.dragging');
-    console.log('The current item being dragged is', dragged_item);
-  });
+    // DRAG OVER (on the potential drop target)
+    draggableElement.addEventListener('dragover', (e) => {
+        e.preventDefault(); // Prevents default behavior (e.g., forbidding drop)
+
+        if (draggedItem && draggedItem !== draggableElement) {
+            // Determine if the dragged item is moving above or below the current element
+            const boundary = e.target.offsetHeight / 2;
+            const y = e.offsetY;
+            const insertBefore = y < boundary;
+
+            // Apply visual styling (optional, but helpful)
+            container.querySelectorAll('.drop-target-above, .drop-target-below').forEach(el => {
+                el.classList.remove('drop-target-above', 'drop-target-below');
+            });
+
+            if (insertBefore) {
+                draggableElement.classList.add('drop-target-above');
+            } else {
+                draggableElement.classList.add('drop-target-below');
+            }
+        }
+    });
+
+    // DRAG LEAVE
+    draggableElement.addEventListener('dragleave', (e) => {
+        // Clear temporary drop visual indicators
+        draggableElement.classList.remove('drop-target-above', 'drop-target-below');
+    });
+
+    // DROP
+    draggableElement.addEventListener('drop', (e) => {
+        e.preventDefault();
+
+        if (draggedItem && draggedItem !== draggableElement) {
+            const isTargetAbove = draggableElement.classList.contains('drop-target-above');
+
+            if (isTargetAbove) {
+                // Insert the dragged item before the current element
+                container.insertBefore(draggedItem, draggableElement);
+            } else {
+                // Insert the dragged item after the current element
+                container.insertBefore(draggedItem, draggableElement.nextSibling);
+            }
+
+            // Clear temporary drop visual indicators from all elements
+            container.querySelectorAll('.drop-target-above, .drop-target-below').forEach(el => {
+                el.classList.remove('drop-target-above', 'drop-target-below');
+            });
+
+            // *OPTIONAL: Update your application's underlying data model (e.g., the array of timers)
+            // to reflect the new order, which is crucial for persistence.*
+        }
+    });
+}
+
+// Initial setup for existing items
+document.querySelectorAll('.draggable').forEach(addDragListeners);
+
+
 };
 
 // remove the selected interval from the array
