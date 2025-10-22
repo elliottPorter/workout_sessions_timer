@@ -152,11 +152,17 @@ button {
   cursor: pointer;
 }
 
-button#start {
+button#start,
+button#save {
   display: none;
 }
 
 button#start:hover {
+  background: #fff;
+  color: orange;
+}
+
+button#save {
   background: #fff;
   color: orange;
 }
@@ -224,35 +230,35 @@ button#stop:hover {
 .draggable:hover {
   cursor: grab;
   background-color: orange;
-  color:#fff;
+  color: #fff;
 }
 
 .draggable:active {
-    cursor: grabbing; /* Changes cursor when actively dragging */
+  cursor: grabbing; /* Changes cursor when actively dragging */
 }
 
 .draggable.dragging {
-	opacity:0.4;
+  opacity: 0.4;
 }
 
 .is-dragging * {
-	cursor: grabbing !important;
+  cursor: grabbing !important;
   cursor: -webkit-grabbing !important;
   cursor: -moz-grabbing !important;
 }
 
 /* Visual cue for dropping above a target */
 .draggable.drop-target-above {
-    border-top: 3px solid orange; /* orange line at the top */
+  border-top: 3px solid orange; /* orange line at the top */
 }
 
 /* Visual cue for dropping below a target */
 .draggable.drop-target-below {
-    border-bottom: 3px solid orange; /* orange line at the bottom */
+  border-bottom: 3px solid orange; /* orange line at the bottom */
 }
 
 #interval_ui {
-	width: 100%;
+  width: 100%;
   display: block;
   border-radius: 10px;
   background: #fff;
@@ -260,7 +266,6 @@ button#stop:hover {
   text-align: center;
   padding: 30px 0;
 }
-
 
 #interval_ui div.interval {
   display: inline-block;
