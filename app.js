@@ -33,242 +33,234 @@ let timers = [];
 
 // functions to pause and resume the intervals
 const pause_the_intervals = () => {
-	pause = true;
+  pause = true;
 };
 
 const resume_the_intervals = () => {
-	pause = false;
+  pause = false;
 };
 
 // give 5 seconds to get ready for start
 const countdown_start = (num) => {
-	let starter = start_count;
-	modal_start.style.setProperty('display', 'block');
-	modal_start.innerHTML = `<div>First up<br><strong>${timers[num].interval_label}</strong><br>in ${starter} seconds...</div>`;
-	let get_ready = setInterval(() => {
-		starter--;
-		if (starter >= 0) {
-			modal_start.innerHTML = `<div>First up<br><strong>${timers[num].interval_label}</strong><br>in ${starter} seconds...</div>`;
-			if (starter <= 3 && starter > 0) {
-				low_beep.play();
-			} else if (starter === 0) {
-				beep.play();
-			}
-		} else {
-			clearInterval(get_ready);
-			start_the_intervals(num);
-		}
-	}, 1000);
+  let starter = start_count;
+  modal_start.style.setProperty('display', 'block');
+  modal_start.innerHTML = `<div>First up<br><strong>${timers[num].interval_label}</strong><br>in ${starter} seconds...</div>`;
+  let get_ready = setInterval(() => {
+    starter--;
+    if (starter >= 0) {
+      modal_start.innerHTML = `<div>First up<br><strong>${timers[num].interval_label}</strong><br>in ${starter} seconds...</div>`;
+      if (starter <= 3 && starter > 0) {
+        low_beep.play();
+      } else if (starter === 0) {
+        beep.play();
+      }
+    } else {
+      clearInterval(get_ready);
+      start_the_intervals(num);
+    }
+  }, 1000);
 };
 
 // the function call from the start button
 const start_the_intervals = (num) => {
-	modal_start.style.setProperty('display', 'none');
-	modal.style.setProperty('display', 'block');
-	let interval_count = timers.length;
-	let count = null;
-	if (num < interval_count) {
-		count = Number(timers[num].totalSeconds);
-	}
+  modal_start.style.setProperty('display', 'none');
+  modal.style.setProperty('display', 'block');
+  let interval_count = timers.length;
+  let count = null;
+  if (num < interval_count) {
+    count = Number(timers[num].totalSeconds);
+  }
 
-	// create the minutes and seconds for the UI
-	let ui_minutes = Math.floor(count / 60);
-	let ui_seconds = Math.floor(count % 60);
+  // create the minutes and seconds for the UI
+  let ui_minutes = Math.floor(count / 60);
+  let ui_seconds = Math.floor(count % 60);
 
-	// the output for the UI minutes and seconds
-	let count_for_ui = `${ui_minutes}m ${ui_seconds}s`;
+  // the output for the UI minutes and seconds
+  let count_for_ui = `${ui_minutes}m ${ui_seconds}s`;
 
-	// update the UI counter
-	main_label.textContent = timers[num].interval_label;
-	main_timer.textContent = count_for_ui;
+  // update the UI counter
+  main_label.textContent = timers[num].interval_label;
+  main_timer.textContent = count_for_ui;
 
-	// set the next interval UI
-	if (num < interval_count - 1) {
-		next_timer.textContent = `Up next: ${timers[num + 1].interval_label}`;
-	} else if (num === interval_count - 1) {
-		next_timer.textContent = `Final interval`;
-	}
+  // set the next interval UI
+  if (num < interval_count - 1) {
+    next_timer.textContent = `Up next: ${timers[num + 1].interval_label}`;
+  } else if (num === interval_count - 1) {
+    next_timer.textContent = `Final interval`;
+  }
 
-	// add a second to all but the first interval
-	if (num !== 0) {
-		count++;
-	}
+  // add a second to all but the first interval
+  if (num !== 0) {
+    count++;
+  }
 
-	// the timer countdown function
-	let countdown = setInterval(() => {
-		// check to ensure we are not paused first
-		if (pause === false) {
-			// decrease the total seconds by 1
-			count--;
+  // the timer countdown function
+  let countdown = setInterval(() => {
+    // check to ensure we are not paused first
+    if (pause === false) {
+      // decrease the total seconds by 1
+      count--;
 
-			// if countdown is ending ( 3 seconds left ) play beeps
-			if (count <= 3 && count > 0) {
-				low_beep.play();
-			} else if (count === 0) {
-				beep.play();
-				// check the index parameter value and use for recursion
-				if (num < interval_count - 1) {
-					clearInterval(countdown);
-					start_the_intervals(num + 1);
-				} else if (num === interval_count - 1) {
-					clearInterval(countdown);
-					next_timer.textContent = `Session complete`;
-					reset_the_intervals();
-				}
-			}
-			let ui_minutes = Math.floor(count / 60);
-			let ui_seconds = Math.floor(count % 60);
+      // if countdown is ending ( 3 seconds left ) play beeps
+      if (count <= 3 && count > 0) {
+        low_beep.play();
+      } else if (count === 0) {
+        beep.play();
+        // check the index parameter value and use for recursion
+        if (num < interval_count - 1) {
+          clearInterval(countdown);
+          start_the_intervals(num + 1);
+        } else if (num === interval_count - 1) {
+          clearInterval(countdown);
+          next_timer.textContent = `Session complete`;
+          reset_the_intervals();
+        }
+      }
+      let ui_minutes = Math.floor(count / 60);
+      let ui_seconds = Math.floor(count % 60);
 
-			let count_for_ui = `${ui_minutes}m ${ui_seconds}s`;
+      let count_for_ui = `${ui_minutes}m ${ui_seconds}s`;
 
-			// update the UI counter
-			main_timer.textContent = count_for_ui;
-		}
-	}, 1000);
+      // update the UI counter
+      main_timer.textContent = count_for_ui;
+    }
+  }, 1000);
 };
 
 // send the intervals entered into the array
 const push_timer_options = (e) => {
-	e.preventDefault();
+  e.preventDefault();
 
-// transform the time entry into seconds
-let totalSeconds = parseInt(seconds.value) + parseInt(minutes.value) * 60;
+  // transform the time entry into seconds
+  let totalSeconds = parseInt(seconds.value) + parseInt(minutes.value) * 60;
 
-// is this a rest period?
-let rest = rest_period.value === 'true' ? true : false;
+  // is this a rest period?
+  let rest = rest_period.value === 'true' ? true : false;
 
-// increase the total seconds for each interval submitted
-interval_total_time += totalSeconds;
+  // increase the total seconds for each interval submitted
+  interval_total_time += totalSeconds;
 
-// function to create total time with minutes and remaining seconds
-const create_total_time_for_ui = (seconds) => {
-	total_minutes = Math.floor(parseInt(seconds) / 60);
-	remaining_seconds = seconds %= 60;
+  // function to create total time with minutes and remaining seconds
+  const create_total_time_for_ui = (seconds) => {
+    total_minutes = Math.floor(parseInt(seconds) / 60);
+    remaining_seconds = seconds %= 60;
 
-	return `Total time: ${total_minutes}m : ${remaining_seconds}s`;
-};
+    return `Total time: ${total_minutes}m : ${remaining_seconds}s`;
+  };
 
-// update the total time in ui
-total_time.innerHTML = create_total_time_for_ui(interval_total_time);
+  // update the total time in ui
+  total_time.innerHTML = create_total_time_for_ui(interval_total_time);
 
-// send the interval content to the array
-timers.push({
-		interval_label: rest ? 'Rest' : interval_description.value,
-		rest: rest,
-		minutes: minutes.value,
-		seconds: seconds.value,
-		totalSeconds: totalSeconds,
-			});
-	
-	console.log(typeof interval_label)
-	// reset the pause and resume buttons container to display after first sessions end
-	pause_resume_buttons.style.setProperty('display', 'flex');
-	
-	console.log('The timer array is ', timers);
-	
-	// call the intervals ui
-	build_the_intervals_list_ui();
+  // send the interval content to the array
+  timers.push({
+    interval_label: rest ? 'Rest' : interval_description.value,
+    rest: rest,
+    minutes: minutes.value,
+    seconds: seconds.value,
+    totalSeconds: totalSeconds,
+  });
+
+  // console.log(typeof interval_label);
+  // reset the pause and resume buttons container to display after first sessions end
+  pause_resume_buttons.style.setProperty('display', 'flex');
+
+  // console.log('The timer array is ', timers);
+
+  // call the intervals ui
+  build_the_intervals_list_ui();
 };
 
 // function to create the intervals ui
 const build_the_intervals_list_ui = () => {
-	
-	// hide the start button until there is an interval
-	if(timers.length > 0){
-		start_button.style.setProperty('display', 'block');
-	} else {
-		reset_the_intervals();
-	}
-	
-		const interval_output = timers.map((timer, index) => {
-			return `<div id=${ index } class="row" draggable="true" ondragend="dragEnd()" ondragover="dragOver(event)" ondragstart="dragStart(event)">
+  // hide the start button until there is an interval
+  if (timers.length > 0) {
+    start_button.style.setProperty('display', 'block');
+  } else {
+    reset_the_intervals();
+  }
+
+  const interval_output = timers.map((timer, index) => {
+    return `<div id=${index} class="draggable" draggable="true">
 		<div class="interval">
-				${ timer.interval_label }
+				${timer.interval_label}
 			</div>
 		<div class="min">
-				${ timer.minutes }m
+				${timer.minutes}m
 			</div>
 			<div class="sec">
-				${ timer.seconds }s
+				${timer.seconds}s
 			</div>
-			<div class="remove" id=${ index }>
+			<div class="remove" id=${index}>
 				X
 			</div>
 		</div>`;
-		});
+  });
 
-// update the intervals ui
-interval_ui.innerHTML = interval_output.join('');
+  // update the intervals ui
+  interval_ui.innerHTML = interval_output.join('');
 
-// grab all of the remove buttons from the interval UI list
-let remove = document.querySelectorAll('.remove');
+  // grab all of the remove buttons from the interval UI list
+  let remove = document.querySelectorAll('.remove');
 
-// add an event listener to each remove button
-remove.forEach((item) => {
-		item.addEventListener('click', remove_item_from_array, false);
-	});
+  // add an event listener to each remove button
+  remove.forEach((item) => {
+    item.addEventListener('click', remove_item_from_array, false);
+  });
+
+  // the drag and drop reorder code
+  // <div id="list_container" ondragover="handleParentDragOver(event)" ondrop="handleParentDrop(event)"><div id=${index} class="draggable" draggable="true"
+  const draggables = document.querySelectorAll('.draggable');
+  const draggable_container = document.querySelectorAll('list_container');
+
+  console.log(draggables);
+
+  draggables.forEach((draggable) => {
+    draggable.addEventListener('dragstart', () => {
+      console.log('dragging');
+      draggable.classList.add('dragging');
+    });
+
+    draggable.addEventListener('dragend', () => {
+      draggable.classList.remove('dragging');
+    });
+  });
+
+  interval_ui.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    const dragged_item = document.querySelector('.dragging');
+    console.log('The current item being dragged is', dragged_item);
+  });
 };
 
 // remove the selected interval from the array
 const remove_item_from_array = (e) => {
-	const e_id = Number(e.target.getAttribute('id'));
-	timers.splice(e_id, 1);
-	build_the_intervals_list_ui();
+  const e_id = Number(e.target.getAttribute('id'));
+  timers.splice(e_id, 1);
+  build_the_intervals_list_ui();
 };
 
 const reset_the_intervals = () => {
-	timers = [];
-	start_button.style.setProperty('display', 'none');
-	interval_ui.innerHTML = 'Waiting for your intervals';
-	total_time.innerHTML = '';
-	interval_total_time = 0;
-	pause_resume_buttons.style.setProperty('display', 'none');
+  timers = [];
+  start_button.style.setProperty('display', 'none');
+  interval_ui.innerHTML = 'Waiting for your intervals';
+  total_time.innerHTML = '';
+  interval_total_time = 0;
+  pause_resume_buttons.style.setProperty('display', 'none');
 };
 
 console.log(typeof pause_resume_buttons);
 
 const show_interval_description = () => {
-	rest_period.value === 'false'
-		? (interval_label.className = 'show') && (interval_description.className = 'show')
-		: (interval_label.className = 'hidden') && (interval_label.className = 'hidden');
+  rest_period.value === 'false'
+    ? (interval_label.className = 'show') &&
+      (interval_description.className = 'show')
+    : (interval_label.className = 'hidden') &&
+      (interval_label.className = 'hidden');
 };
 
 const close_the_modal = () => {
-	modal.style.setProperty('display', 'none');
+  modal.style.setProperty('display', 'none');
 };
-
-// the drag and drop reorder code
-let selected = null;
-
-console.log(typeof selected);
-
-function dragOver(e) {
-	if (isBefore(selected, e.target)) {
-		e.target.parentNode.insertBefore(selected, e.target);
-	} else {
-		e.target.parentNode.insertBefore(selected, e.target.nextSibling);
-	}
-}
-
-function dragEnd() {
-	selected = null;
-}
-
-function dragStart(e) {
-	e.dataTransfer.effectAllowed = 'move';
-	e.dataTransfer.setData('text/plain', null);
-	selected = e.target;
-}
-
-function isBefore(el1, el2) {
-	let cur;
-	if (el2.parentNode === el1.parentNode) {
-		for (cur = el1.previousSibling; cur; cur = cur.previousSibling) {
-			if (cur === el2) return true;
-		}
-	}
-	return false;
-}
 
 // create the event listeners
 // #region for event listeners

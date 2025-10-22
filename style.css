@@ -1,312 +1,323 @@
 /* load the fonts */
 @font-face {
-	font-family: 'Roboto_mono_light';
-	src: url('./fonts/RobotoMono-Light.ttf') format('TrueType');
+  font-family: 'Roboto_mono_light';
+  src: url('./fonts/RobotoMono-Light.ttf') format('TrueType');
 }
 
 @font-face {
-	font-family: 'Roboto_mono_semi_bold';
-	src: url('./fonts/RobotoMono-SemiBold.ttf') format('TrueType');
+  font-family: 'Roboto_mono_semi_bold';
+  src: url('./fonts/RobotoMono-SemiBold.ttf') format('TrueType');
 }
 
 @font-face {
-	font-family: 'Roboto_mono_bold';
-	src: url('./fonts/RobotoMono-Bold.ttf') format('TrueType');
+  font-family: 'Roboto_mono_bold';
+  src: url('./fonts/RobotoMono-Bold.ttf') format('TrueType');
 }
 
 body {
-	font-family: Roboto_mono_light, sans-serif;
-	font-size: 2.5em;
-	background-color: #222;
-	color: #eee;
+  font-family: Roboto_mono_light, sans-serif;
+  font-size: 2.5em;
+  background-color: #222;
+  color: #eee;
 }
 
 #modal_for_display {
-	position: absolute;
-	width: 90%;
-	margin: 10px auto;
-	display: none;
-	height: 90vh;
-	z-index: 666;
-	left: 5%;
-	background-color: orange;
-	border-radius: 10px;
+  position: absolute;
+  width: 90%;
+  margin: 10px auto;
+  display: none;
+  height: 90vh;
+  z-index: 666;
+  left: 5%;
+  background-color: orange;
+  border-radius: 10px;
 }
 
 #modal_start {
-	position: relative;
-	width: 50vw;
-	display: none;
-	height: 50vh;
-	margin:40px auto;
-	background-color: #fff;
-	border-radius: 50px;
-	color:#222;
-	text-align:center;
-	font-size: 2em;
-	margin-top:30px;
+  position: relative;
+  width: 50vw;
+  display: none;
+  height: 50vh;
+  margin: 40px auto;
+  background-color: #fff;
+  border-radius: 50px;
+  color: #222;
+  text-align: center;
+  font-size: 2em;
+  margin-top: 30px;
 }
 
 #container {
-	position: absolute;
-	width: 90%;
-	left: 5%;
-	margin: 10px auto;
-	display: grid;
-	grid-template-columns: 68% 28%;
-	grid-gap: 1%;
-	height: 90vh;
-	z-index: 1;
+  position: absolute;
+  width: 90%;
+  left: 5%;
+  margin: 10px auto;
+  display: grid;
+  grid-template-columns: 68% 28%;
+  grid-gap: 1%;
+  height: 90vh;
+  z-index: 1;
 }
 
 #output {
-	grid-column-start: 1;
-	height: 100%;
+  grid-column-start: 1;
+  height: 100%;
 }
 
 #input {
-	grid-column-start: 2;
-	height: 100%;
+  grid-column-start: 2;
+  height: 100%;
 }
 
 form {
-	width: 100%;
-	border-radius: 10px;
-	padding: 2%;
-	background: rgba(255, 255, 255, 0.2);
-	font-size: 1em;
-	text-align: center;
+  width: 100%;
+  border-radius: 10px;
+  padding: 2%;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 1em;
+  text-align: center;
 }
 
 input,
 select {
-	font-size: 1em;
-	border: none;
-	border-radius: 5px;
-	padding: 12px;
-	background: orange;
-	color: #222;
-	font-family: Roboto_mono_bold, sans-serif;
-	width: 90%;
-	display: block;
-	margin: 10px auto;
-	text-align: center;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  padding: 12px;
+  background: orange;
+  color: #222;
+  font-family: Roboto_mono_bold, sans-serif;
+  width: 90%;
+  display: block;
+  margin: 10px auto;
+  text-align: center;
 }
 
 input#reset_intervals {
-	background: #222;
-	color: orange;
-	font-family: Roboto_mono_light, sans-serif;
-	font-size: 80%;
+  background: #222;
+  color: orange;
+  font-family: Roboto_mono_light, sans-serif;
+  font-size: 80%;
 }
 
 input#reset_intervals:hover {
-	background: orange;
-	color: #222;
+  background: orange;
+  color: #222;
 }
 
 input[type='submit']:hover {
-	cursor: pointer;
-	color: orange;
-	background: #eee;
+  cursor: pointer;
+  color: orange;
+  background: #eee;
 }
 
 input#user_submit {
-	cursor: pointer;
-	color: orange;
-	background: #eee;
+  cursor: pointer;
+  color: orange;
+  background: #eee;
 }
 
 input#user_submit:hover {
-	cursor: pointer;
-	color: #eee;
-	background: orange;
+  cursor: pointer;
+  color: #eee;
+  background: orange;
 }
 
 input[type='submit']:hover {
-	cursor: pointer;
-	color: orange;
-	background: #eee;
+  cursor: pointer;
+  color: orange;
+  background: #eee;
 }
 
 input#interval_description {
-	width: 86%;
-	display: block;
-	margin: 0 auto;
+  width: 86%;
+  display: block;
+  margin: 0 auto;
 }
 
 label {
-	font-size: 1em;
+  font-size: 1em;
 }
 
 button {
-	font-size: 1.5em;
-	border: none;
-	background: orange;
-	color: #fff;
-	border-radius: 10px;
-	padding: 0.2em 0;
-	font-family: Roboto_mono_bold, sans-serif;
-	width: 100%;
-	margin: 20px auto 20px auto;
-	cursor: pointer;
+  font-size: 1.5em;
+  border: none;
+  background: orange;
+  color: #fff;
+  border-radius: 10px;
+  padding: 0.2em 0;
+  font-family: Roboto_mono_bold, sans-serif;
+  width: 100%;
+  margin: 20px auto 20px auto;
+  cursor: pointer;
 }
 
 button#start {
-	display: none;
+  display: none;
 }
 
 button#start:hover {
-	background: #fff;
-	color: orange;
+  background: #fff;
+  color: orange;
 }
 
 button#pause_timer,
 button#resume_timer {
-	font-size: 1em;
-	border: none;
-	background: #222;
-	color: #fff;
-	border-radius: 10px;
-	padding: 0.2em 0;
-	font-family: Roboto_mono_bold, sans-serif;
-	width: 30%;
-	cursor: pointer;
-	text-align:center;
-	margin:0 auto;
+  font-size: 1em;
+  border: none;
+  background: #222;
+  color: #fff;
+  border-radius: 10px;
+  padding: 0.2em 0;
+  font-family: Roboto_mono_bold, sans-serif;
+  width: 30%;
+  cursor: pointer;
+  text-align: center;
+  margin: 0 auto;
 }
 
 button#pause_timer:hover,
 button#resume_timer:hover {
-	background: #fff;
-	color: #222;
+  background: #fff;
+  color: #222;
 }
 
 button#close {
-	border-radius: 50px;
-	background-color: #fff;
-	position: absolute;
-	width: 50px;
-	height: 50px;
-	right: 5%;
-	top: 5%;
-	color: #222;
-	font-size: 70%;
+  border-radius: 50px;
+  background-color: #fff;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  right: 5%;
+  top: 5%;
+  color: #222;
+  font-size: 70%;
 }
 
 button#stop:hover {
-	background: #fff;
-	color: orange;
+  background: #fff;
+  color: orange;
 }
 
 #buttons_container {
-	width:40%;
-	margin:0 auto;
-	display:flex;
+  width: 40%;
+  margin: 0 auto;
+  display: flex;
 }
 
 .hidden {
-	display: none;
+  display: none;
 }
 
 .show {
-	display: block;
+  display: block;
 }
 
-.row {
-	width: 100%;
-	padding:12px 0 0 0;
-	margin: 0;
-	display:block;
-	cursor:grab;
+.draggable {
+  width: 100%;
+  padding: 12px 0 0 0;
+  margin: 0;
+  display: block;
+  cursor: grab;
 }
 
-.row:hover {
-	cursor:grab;
-	background-color:#222;
+.draggable:hover {
+  cursor: grab;
+  background-color: #222;
+}
+
+.draggable.dragging {
+	background-color:red;
+}
+
+.is-dragging * {
+	cursor: grabbing !important;
+  cursor: -webkit-grabbing !important;
+  cursor: -moz-grabbing !important;
 }
 
 #interval_ui {
 	width: 100%;
-	display: block;
-	border-radius: 10px;
-	background: #fff;
-	color: orange;
-	text-align: center;
-	padding: 30px 0;
+  display: block;
+  border-radius: 10px;
+  background: #fff;
+  color: orange;
+  text-align: center;
+  padding: 30px 0;
 }
 
+
 #interval_ui div.interval {
-	display: inline-block;
-	width: 55%;
-	text-align: left;
-	border-bottom: 2px dotted #ccc;
-	padding: 0px 0 15px;
+  display: inline-block;
+  width: 55%;
+  text-align: left;
+  border-bottom: 2px dotted #ccc;
+  padding: 0px 0 15px;
 }
 
 #interval_ui div.min {
-	display: inline-block;
-	width: 15%;
-	text-align: left;
-	border-bottom: 2px dotted #ccc;
-	padding: 0px 0 15px;
+  display: inline-block;
+  width: 15%;
+  text-align: left;
+  border-bottom: 2px dotted #ccc;
+  padding: 0px 0 15px;
 }
 
 #interval_ui div.sec {
-	display: inline-block;
-	width: 15%;
-	text-align: left;
-	border-bottom: 2px dotted #ccc;
-	padding: 0px 0 15px;
+  display: inline-block;
+  width: 15%;
+  text-align: left;
+  border-bottom: 2px dotted #ccc;
+  padding: 0px 0 15px;
 }
 
 #interval_ui div.remove {
-	display: inline-block;
-	width: 5%;
-	text-align: left;
-	border-bottom: 2px dotted #ccc;
-	padding: 0px 0 15px;
+  display: inline-block;
+  width: 5%;
+  text-align: left;
+  border-bottom: 2px dotted #ccc;
+  padding: 0px 0 15px;
 }
 
 #timer_container {
-	width: 100%;
-	border-radius: 10px;
-	padding-top: 2%;
-	background: orange;
-	height: 50vh;
-	display: flex;
+  width: 100%;
+  border-radius: 10px;
+  padding-top: 2%;
+  background: orange;
+  height: 50vh;
+  display: flex;
 }
 
 #main_label {
-	width: 100%;
-	font-size: 3em;
-	text-align: center;
-	color: #fff;
-	margin-top: 40px;
-	font-family: 'Roboto_mono_bold',Arial, Helvetica, sans-serif;
+  width: 100%;
+  font-size: 3em;
+  text-align: center;
+  color: #fff;
+  margin-top: 40px;
+  font-family: 'Roboto_mono_bold', Arial, Helvetica, sans-serif;
 }
 
 #main_timer {
-	width: 100%;
-	font-size: 4em;
-	color: #fff;
-	text-align: center;
-	font-family:Roboto_mono_bold;
+  width: 100%;
+  font-size: 4em;
+  color: #fff;
+  text-align: center;
+  font-family: Roboto_mono_bold;
 }
 
 #next_timer {
-	width: 100%;
-	font-size: 2.2em;
-	color: #222;
-	text-align: center;
+  width: 100%;
+  font-size: 2.2em;
+  color: #222;
+  text-align: center;
 }
 
 #total_time {
-	width: 100%;
-	font-size: 1em !important;
-	padding: 15px 0;
-	text-align: center;
-	align-content: flex-end;
-	border-radius: 10px;
-	margin: 0;
+  width: 100%;
+  font-size: 1em !important;
+  padding: 15px 0;
+  text-align: center;
+  align-content: flex-end;
+  border-radius: 10px;
+  margin: 0;
 }
