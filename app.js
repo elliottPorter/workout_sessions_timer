@@ -1,5 +1,4 @@
 // create the variables
-//#region for variables
 const main_timer = document.getElementById('main_timer');
 const main_label = document.getElementById('main_label');
 const beep = document.getElementById('beep');
@@ -30,7 +29,7 @@ let total_seconds = 0;
 let remaining_seconds = 0;
 let interval_total_time = 0;
 let timers = [];
-//#endregion
+let updated_timers = [];
 
 // functions to pause and resume the intervals
 const pause_the_intervals = () => {
@@ -216,7 +215,7 @@ const build_the_intervals_list_ui = () => {
    * Attaches drag and drop event listeners to all existing and new draggable items.
    */
   function addDragListeners(draggableElement) {
-    // DRAG START
+    // Drag start
     draggableElement.addEventListener('dragstart', (e) => {
       draggedItem = draggableElement;
       // The dataTransfer object is necessary for drag-and-drop to work,
@@ -227,14 +226,14 @@ const build_the_intervals_list_ui = () => {
       setTimeout(() => draggableElement.classList.add('dragging'), 0);
     });
 
-    // DRAG END
+    // Drag end
     draggableElement.addEventListener('dragend', () => {
       draggedItem = null;
       // Remove the visual feedback class
       draggableElement.classList.remove('dragging');
     });
 
-    // DRAG OVER (on the potential drop target)
+    // Drag over (on the potential drop target)
     draggableElement.addEventListener('dragover', (e) => {
       e.preventDefault(); // Prevents default behavior (e.g., forbidding drop)
 
@@ -259,7 +258,7 @@ const build_the_intervals_list_ui = () => {
       }
     });
 
-    // DRAG LEAVE
+    // Drag leave
     draggableElement.addEventListener('dragleave', (e) => {
       // Clear temporary drop visual indicators
       draggableElement.classList.remove(
@@ -268,7 +267,7 @@ const build_the_intervals_list_ui = () => {
       );
     });
 
-    // DROP
+    // Drop
     draggableElement.addEventListener('drop', (e) => {
       e.preventDefault();
 
@@ -293,6 +292,7 @@ const build_the_intervals_list_ui = () => {
             el.classList.remove('drop-target-above', 'drop-target-below');
           });
       }
+      update_timers();
     });
   }
 
@@ -330,8 +330,36 @@ const close_the_modal = () => {
   modal.style.setProperty('display', 'none');
 };
 
+// update the timers array with the new order
+const update_timers = () => {
+  updated_timers.length = 0;
+  const updated_interval_list = document.querySelectorAll('.draggable');
+  updated_interval_list.forEach((item) => {
+    updated_timers.push(timers[item.id]);
+    console.log('The new order timers', updated_timers);
+  });
+  timers = [...updated_timers];
+  console.log('The original times', timers);
+  build_the_intervals_list_ui();
+};
+
+const save_timers = () => {
+  save_button.style.display = 'none';
+  const timers_stringify = JSON.stringify(timers);
+  localStorage.setItem('Timers', timers_stringify);
+  // timers = [...updated_timers];
+};
+
+// check to see if we have a timer saved to local storage
+if (localStorage.getItem('Timers')) {
+  let stored_timers = localStorage.getItem('Timers');
+  let retrieved_timers = JSON.parse(stored_timers);
+  timers = [...retrieved_timers];
+  build_the_intervals_list_ui();
+}
+
 // create the event listeners
-// #region for event listeners
+save_button.addEventListener('click', save_timers, false);
 user_submit.addEventListener('click', push_timer_options, false);
 reset_intervals.addEventListener('click', reset_the_intervals, false);
 rest_period.addEventListener('change', show_interval_description, false);
@@ -339,4 +367,3 @@ pause_button.addEventListener('click', pause_the_intervals, false);
 resume_button.addEventListener('click', resume_the_intervals, false);
 close_modal.addEventListener('click', close_the_modal, false);
 reset_intervals.addEventListener('click', reset_the_intervals, false);
-// #endregion
