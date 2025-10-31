@@ -4,51 +4,66 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Jump rope timer</title>
+		<meta name="description" content="Interval timer for workout sessions, perfect for jump rope, HIIT, and other timed exercises" />
+		<title>Workout Interval Timer</title>
 		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 	<body>
-		<div id="modal_for_display">
-			<button id="close">X</button>
+		<!-- Timer display modal -->
+		<div id="modal_for_display" role="dialog" aria-labelledby="main_label" aria-hidden="true">
+			<button id="close" aria-label="Close timer display">X</button>
 
-			<div id="main_label"></div>
-			<div id="main_timer"></div>
-			<div id="next_timer"></div>
+			<div id="main_label" aria-live="polite"></div>
+			<div id="main_timer" aria-live="polite" aria-atomic="true"></div>
+			<div id="next_timer" aria-live="polite"></div>
 			<div id="total_time"></div>
 
 			<div id="buttons_container">
-				<button id="pause_timer">Pause</button>
-				<button id="resume_timer">Resume</button>
+				<button id="pause_timer" aria-label="Pause the timer">Pause</button>
+				<button id="resume_timer" aria-label="Resume the timer">Resume</button>
+				<button id="stop" aria-label="Stop and cancel the timer">Stop</button>
 			</div>
 		</div>
-		<div id="modal_start"></div>
-		<div id="container">
-			<div id="output">
-				<div id="interval_ui">Waiting for your intervals</div>
 
+		<!-- Countdown start modal -->
+		<div id="modal_start" role="status" aria-live="assertive" aria-atomic="true"></div>
 
-				<button id="save" onClick="saveDragDrop()">Save intervals</button>
-				<button id="start" onClick="countdown_start(0)">Start intervals</button>
-			</div>
-			<div id="input">
+		<main id="container">
+			<!-- Output section showing interval list -->
+			<section id="output" aria-label="Workout intervals list">
+				<div id="interval_ui" role="list" aria-label="Current intervals">Waiting for your intervals</div>
+
+				<button id="save" style="display: none;" aria-label="Save reordered intervals">Save intervals</button>
+				<button id="start" style="display: none;" aria-label="Start workout intervals">Start intervals</button>
+			</section>
+
+			<!-- Input section for creating intervals -->
+			<section id="input" aria-label="Add new interval">
 				<form id="user_input">
 					<div>
-						<label for="rest_period"
-							>Rest?
-							<select id="rest_period">
+						<label for="rest_period">
+							Rest period?
+							<select id="rest_period" aria-describedby="rest_help">
 								<option value="false" selected="selected">No</option>
 								<option value="true">Yes</option>
 							</select>
 						</label>
-						<label id="interval_label" for="interval_description"
-							>Label
-							<input id="interval_description" />
+						<span id="rest_help" class="sr-only">Select 'Yes' if this is a rest period</span>
+
+						<label id="interval_label" for="interval_description">
+							Interval label
+							<input
+								id="interval_description"
+								type="text"
+								placeholder="e.g., Jump rope"
+								aria-required="false"
+							/>
 						</label>
 					</div>
 					<div>
-						<label for="minutes"
-							>Minutes
-							<select id="minutes" name="minutes">
+						<label for="minutes">
+							Minutes
+							<select id="minutes" name="minutes" aria-label="Select minutes for interval duration">
 								<option value="0" selected="selected">0</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -62,9 +77,9 @@
 								<option value="10">10</option>
 							</select>
 						</label>
-						<label for="seconds"
-							>Seconds
-							<select id="seconds" name="seconds">
+						<label for="seconds">
+							Seconds
+							<select id="seconds" name="seconds" aria-label="Select seconds for interval duration">
 								<option value="0" selected>0</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -128,15 +143,14 @@
 							</select>
 						</label>
 					</div>
-					<input type="submit" id="user_submit" value="Add interval" />
-					<input type="submit" id="reset_intervals" value="Reset intervals" />
-					<!-- <input type="submit" class="reset" id="stop_intervals" value="Stop intervals" /> -->
+					<input type="submit" id="user_submit" value="Add interval" aria-label="Add this interval to the list" />
+					<input type="button" id="reset_intervals" value="Reset intervals" aria-label="Clear all intervals" />
 				</form>
 
-				<audio id="beep" src="./sounds/beep.mp3"></audio>
-				<audio id="low_beep" src="./sounds/Robot_blip-Marianne_Gagnon-120342607.mp3"></audio>
+				<audio id="beep" src="./sounds/beep.mp3" aria-hidden="true"></audio>
+				<audio id="low_beep" src="./sounds/Robot_blip-Marianne_Gagnon-120342607.mp3" aria-hidden="true"></audio>
 			</div>
-		</div>
+		</main>
 		<script src="app.js"></script>
 	</body>
 </html>
