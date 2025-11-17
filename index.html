@@ -9,9 +9,9 @@
 	</head>
 	<body>
 		<div id="app">
-			<div id="main_timer"></div>
-			<button onClick="countdown(5)">Start</button>
-			<audio id="beep" src="./sounds/beep.mp3"></audio>
+			<div id="main_timer" role="timer" aria-live="polite" aria-atomic="true"></div>
+			<button id="start_button" aria-label="Start 5 second countdown timer">Start</button>
+			<audio id="beep" src="./sounds/beep.mp3" aria-hidden="true"></audio>
 		</div>
 		<script src="app.js"></script>
 	</body>
